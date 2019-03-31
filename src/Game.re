@@ -28,8 +28,9 @@ let make = _children => {
   initialState: () => initialState,
   reducer: (action, state) =>
     switch(action) {
+    /* TODO: update state */
     | ClickSquare(string) => ReasonReact.Update({ ...state, gameState: Playing(Circle) })
-    | Restart => ReasonReact.Update({ ...state, gameState: Playing(Cross) })
+    | Restart => ReasonReact.Update(initialState)
     },
   render: ({state, send}) =>
   /* render: ({state, send}) => */

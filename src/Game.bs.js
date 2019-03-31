@@ -99,10 +99,7 @@ function make(_children) {
                             /* gameState : Playing */Block.__(0, [/* Circle */1])
                           ]]);
               } else {
-                return /* Update */Block.__(0, [/* record */[
-                            /* board */state[/* board */0],
-                            /* gameState : Playing */Block.__(0, [/* Cross */0])
-                          ]]);
+                return /* Update */Block.__(0, [initialState]);
               }
             }),
           /* jsElementWrapped */component[/* jsElementWrapped */13]
