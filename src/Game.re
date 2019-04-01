@@ -1,13 +1,6 @@
 open Utils;
 open SharedTypes;
 
-let game =
-  Css.[
-    background(red),
-    fontFamily("Courier New, arial"),
-    color(white),
-  ];
-
 type action = 
   | ClickSquare(string)
   | Restart;
@@ -33,14 +26,9 @@ let make = _children => {
     | Restart => ReasonReact.Update(initialState)
     },
   render: ({state, send}) =>
-  /* render: ({state, send}) => */
-    <div className={Css.style(game)}>
-      (toString("Game Board"))
-      <Board
-        state
-        onRestart=(_evt => send(Restart))
-        onMark=(id => send(ClickSquare(id)))
-      />
-      
-    </div>,
+    <Board
+      state
+      onRestart=(_evt => send(Restart))
+      onMark=(id => send(ClickSquare(id)))
+    />
 };

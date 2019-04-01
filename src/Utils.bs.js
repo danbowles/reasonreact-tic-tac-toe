@@ -6,5 +6,8 @@ function toString(prim) {
   return prim;
 }
 
+var cssButtonReset = "button {\n  border: none;\n  margin: 0;\n  padding: 0;\n  width: auto;\n  overflow: visible;\n\n  background: transparent;\n\n  /* inherit font & color from ancestor */\n  color: inherit;\n  font: inherit;\n\n  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */\n  line-height: normal;\n\n  /* Corrects font smoothing for webkit */\n  -webkit-font-smoothing: inherit;\n  -moz-osx-font-smoothing: inherit;\n\n  /* Corrects inability to style clickable `input` types in iOS */\n  -webkit-appearance: none;\n}\n\nbutton::-moz-focus-inner {\n  border: 0;\n  padding: 0;\n}";
+
 exports.toString = toString;
+exports.cssButtonReset = cssButtonReset;
 /* No side effect */

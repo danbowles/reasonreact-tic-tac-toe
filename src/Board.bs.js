@@ -9,19 +9,12 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Utils$ReactTemplate = require("./Utils.bs.js");
 var BoardRow$ReactTemplate = require("./BoardRow.bs.js");
 
-var boardRow_000 = Css.border(Css.px(2), Css.solid, Css.hex("475646"));
-
-var boardRow = /* :: */[
-  boardRow_000,
-  /* [] */0
-];
-
 var board_000 = Css.background(Css.hex("de3ac9"));
 
 var board_001 = /* :: */[
-  Css.fontFamily("arial"),
+  Css.color(Css.white),
   /* :: */[
-    Css.color(Css.white),
+    Css.fontFamily("arial"),
     /* [] */0
   ]
 ];
@@ -48,9 +41,7 @@ function make(state, onMark, onRestart, _children) {
               return React.createElement("div", {
                           className: Css.style(board)
                         }, $$Array.of_list(List.mapi((function (index, row) {
-                                    return React.createElement("div", {
-                                                className: Css.style(boardRow)
-                                              }, ReasonReact.element(String(index), undefined, BoardRow$ReactTemplate.make(state[/* gameState */1], row, onMark, index, /* array */[])));
+                                    return ReasonReact.element(String(index), undefined, BoardRow$ReactTemplate.make(state[/* gameState */1], row, onMark, index, List.length(state[/* board */0]) === (index + 1 | 0), /* array */[]));
                                   }), state[/* board */0])), React.createElement("div", undefined, Utils$ReactTemplate.toString("TODO: Game State Here")));
             }),
           /* initialState */component[/* initialState */10],
@@ -60,8 +51,7 @@ function make(state, onMark, onRestart, _children) {
         ];
 }
 
-exports.boardRow = boardRow;
 exports.board = board;
 exports.component = component;
 exports.make = make;
-/* boardRow Not a pure module */
+/* board Not a pure module */

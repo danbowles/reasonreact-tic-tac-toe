@@ -1,16 +1,11 @@
 open Utils;
 open SharedTypes;
 
-let boardRow =
-  Css.[
-    border(px(2), solid, hex("475646"))
-  ];
-
 let board =
   Css.[
     background(hex("de3ac9")),
-    fontFamily("arial"),
     color(white),
+    fontFamily("arial"),
   ];
 
 let component = ReasonReact.statelessComponent("Board");
@@ -22,15 +17,14 @@ let make = (~state: state, ~onMark, ~onRestart, _children) => {
       (
         state.board
         |> List.mapi((index: int, row: row) =>
-          <div className={Css.style{boardRow}}>
-            <BoardRow
-              key=(string_of_int(index))
-              gameState=state.gameState
-              row
-              onMark
-              index
-            />
-          </div>
+          <BoardRow
+            key=(string_of_int(index))
+            gameState=state.gameState
+            row
+            onMark
+            index
+            isLastRow=(List.length(state.board) == (index + 1))
+          />
           )
         |> Array.of_list
         |> ReasonReact.array
