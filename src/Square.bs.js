@@ -2,7 +2,9 @@
 'use strict';
 
 var Css = require("bs-css/src/Css.js");
+var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
+var $$String = require("bs-platform/lib/js/string.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Utils$ReactTemplate = require("./Utils.bs.js");
 
@@ -20,9 +22,35 @@ var buttonSquare = /* :: */[
   buttonSquare_001
 ];
 
+var square_000 = Css.borderRight(Css.px(5), Css.dotted, Css.rgb(0, 0, 0));
+
+var square = /* :: */[
+  square_000,
+  /* [] */0
+];
+
+var lastSquare_000 = Css.borderRightWidth(Css.px(0));
+
+var lastSquare = /* :: */[
+  lastSquare_000,
+  /* [] */0
+];
+
+function toValue(field) {
+  if (field) {
+    if (field[0]) {
+      return "O";
+    } else {
+      return "X";
+    }
+  } else {
+    return "";
+  }
+}
+
 var component = ReasonReact.statelessComponent("Square");
 
-function make(value, gameState, onMark, _children) {
+function make(value, gameState, onMark, isLastSquare, _children) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -34,9 +62,21 @@ function make(value, gameState, onMark, _children) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (param) {
-              return React.createElement("button", {
-                          className: Css.style(buttonSquare)
-                        }, Utils$ReactTemplate.toString("Hi"));
+              var className = $$String.concat(" ", /* :: */[
+                    Css.style(square),
+                    /* :: */[
+                      isLastSquare ? Css.style(lastSquare) : "",
+                      /* [] */0
+                    ]
+                  ]);
+              return React.createElement("div", {
+                          className: className
+                        }, React.createElement("button", {
+                              className: Css.style(buttonSquare),
+                              onClick: (function (_evt) {
+                                  return Curry._1(onMark, /* () */0);
+                                })
+                            }, Utils$ReactTemplate.toString(toValue(value))));
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],
@@ -46,6 +86,9 @@ function make(value, gameState, onMark, _children) {
 }
 
 exports.buttonSquare = buttonSquare;
+exports.square = square;
+exports.lastSquare = lastSquare;
+exports.toValue = toValue;
 exports.component = component;
 exports.make = make;
 /*  Not a pure module */

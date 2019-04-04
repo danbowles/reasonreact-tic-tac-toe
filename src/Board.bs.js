@@ -9,14 +9,11 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Utils$ReactTemplate = require("./Utils.bs.js");
 var BoardRow$ReactTemplate = require("./BoardRow.bs.js");
 
-var board_000 = Css.background(Css.hex("de3ac9"));
+var board_000 = Css.fontFamily("arial");
 
 var board_001 = /* :: */[
-  Css.color(Css.white),
-  /* :: */[
-    Css.fontFamily("arial"),
-    /* [] */0
-  ]
+  Css.width(Css.px(600)),
+  /* [] */0
 ];
 
 var board = /* :: */[

@@ -3,9 +3,8 @@ open SharedTypes;
 
 let board =
   Css.[
-    background(hex("de3ac9")),
-    color(white),
     fontFamily("arial"),
+    width(px(600)),
   ];
 
 let component = ReasonReact.statelessComponent("Board");

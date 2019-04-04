@@ -15,10 +15,7 @@ var boardRow_000 = Css.borderBottom(Css.px(5), Css.dotted, Css.rgb(0, 0, 0));
 var boardRow_001 = /* :: */[
   Css.display(Css.flexBox),
   /* :: */[
-    Css.selector("&::last-child", /* :: */[
-          Css.borderWidth(Css.px(0)),
-          /* [] */0
-        ]),
+    Css.justifyContent(Css.center),
     /* [] */0
   ]
 ];
@@ -62,7 +59,7 @@ function make(gameState, row, onMark, index, isLastRow, _children) {
                                     var id = String(index) + String(ind);
                                     return ReasonReact.element(id, undefined, Square$ReactTemplate.make(value, gameState, (function (param) {
                                                       return Curry._1(onMark, id);
-                                                    }), /* array */[]));
+                                                    }), List.length(row) === (ind + 1 | 0), /* array */[]));
                                   }), row)));
             }),
           /* initialState */component[/* initialState */10],

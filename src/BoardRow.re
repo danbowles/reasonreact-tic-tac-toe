@@ -5,12 +5,7 @@ let boardRow =
   Css.[
     borderBottom(px(5), dotted, rgb(0, 0, 0)),
     display(flexBox),
-    selector(
-      "&::last-child",
-      [
-        borderWidth(px(0))
-      ],
-    ),
+    justifyContent(center),
   ];
 
 let lastBoardRow =
@@ -45,6 +40,7 @@ let make = (
               onMark=(() => onMark(id))
               value
               gameState
+              isLastSquare=(List.length(row) == (ind + 1))
             />
            })
         |> Array.of_list

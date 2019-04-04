@@ -9,10 +9,40 @@ let buttonSquare =
     padding(em(3.0)),
   ];
 
+let square =
+  Css.[
+    borderRight(px(5), dotted, rgb(0, 0, 0)),
+  ];
+
+let lastSquare =
+  Css.[
+    borderRightWidth(px(0)),
+  ];
+
+let toValue = (field: field) =>
+  switch (field) {
+  | Marked(Cross) => "X"
+  | Marked(Circle) => "O"
+  | Empty => ""
+};
+
 let component = ReasonReact.statelessComponent("Square");
 
-let make = (~value: field, ~gameState, ~onMark, _children) => {
+let make = (~value: field, ~gameState, ~onMark, ~isLastSquare: bool, _children) => {
   ...component,
-  render: (_) =>
-    <button className={Css.style(buttonSquare)}>(toString("Hi"))</button>,
+  render: (_) => {
+    let className = [
+      Css.style(square),
+      isLastSquare ? Css.style(lastSquare) : "",
+    ]
+    |> String.concat(" ");
+    <div className>
+      <button
+        className={Css.style(buttonSquare)}
+        onClick=(_evt => onMark())
+      >
+        (value |> toValue |> toString)
+      </button>
+    </div>
+  },
 };
