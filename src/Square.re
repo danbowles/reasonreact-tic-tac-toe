@@ -5,13 +5,17 @@ Css.insertRule(cssButtonReset);
 
 let buttonSquare =
   Css.[
-    flexBasis(em(33.3)),
-    padding(em(3.0)),
-  ];
-
-let square =
-  Css.[
-    borderRight(px(5), dotted, rgb(0, 0, 0)),
+    fontFamily("'Righteous', cursive;"),
+    fontSize(em(4.0)),
+    height(pct(100.0)),
+    width(pct(100.0)),
+    ];
+    
+  let square =
+    Css.[
+      borderRight(px(5), solid, hex("DDDDDD")),
+      flexBasis(em(33.3)),
+      height(px(200)),
   ];
 
 let lastSquare =

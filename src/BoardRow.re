@@ -3,7 +3,7 @@ open Utils;
 
 let boardRow =
   Css.[
-    borderBottom(px(5), dotted, rgb(0, 0, 0)),
+    borderBottom(px(5), solid, hex("DDDDDD")),
     display(flexBox),
     justifyContent(center),
   ];

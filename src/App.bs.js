@@ -7,11 +7,6 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Game$ReactTemplate = require("./Game.bs.js");
 var Utils$ReactTemplate = require("./Utils.bs.js");
 
-Css.$$global("html, body", /* :: */[
-      Css.backgroundColor(Css.hex("F4F4F4")),
-      /* [] */0
-    ]);
-
 var appTitle_000 = Css.color(Css.hex("0277bd"));
 
 var appTitle_001 = /* :: */[
@@ -64,4 +59,4 @@ function make(_children) {
 exports.appTitle = appTitle;
 exports.component = component;
 exports.make = make;
-/*  Not a pure module */
+/* appTitle Not a pure module */

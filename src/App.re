@@ -4,9 +4,6 @@ open Utils;
 Css.(
   global(
     "html, body",
-    [
-      backgroundColor(hex("F4F4F4"))
-    ]
   )
 );
 

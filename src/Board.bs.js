@@ -9,17 +9,36 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Utils$ReactTemplate = require("./Utils.bs.js");
 var BoardRow$ReactTemplate = require("./BoardRow.bs.js");
 
-var board_000 = Css.fontFamily("arial");
+var board_000 = Css.backgroundColor(Css.white);
 
 var board_001 = /* :: */[
-  Css.width(Css.px(600)),
-  /* [] */0
+  Css.margin2(Css.px(0), Css.auto),
+  /* :: */[
+    Css.width(Css.px(600)),
+    /* [] */0
+  ]
 ];
 
 var board = /* :: */[
   board_000,
   board_001
 ];
+
+function setStatus(gameState) {
+  if (typeof gameState === "number") {
+    return "Draw! :(";
+  } else if (gameState.tag) {
+    if (gameState[0]) {
+      return "Circle Won!";
+    } else {
+      return "Cross Won!";
+    }
+  } else if (gameState[0]) {
+    return "Turn: Circle";
+  } else {
+    return "Turn: Cross";
+  }
+}
 
 var component = ReasonReact.statelessComponent("Board");
 
@@ -35,11 +54,24 @@ function make(state, onMark, onRestart, _children) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (param) {
-              return React.createElement("div", {
-                          className: Css.style(board)
-                        }, $$Array.of_list(List.mapi((function (index, row) {
-                                    return ReasonReact.element(String(index), undefined, BoardRow$ReactTemplate.make(state[/* gameState */1], row, onMark, index, List.length(state[/* board */0]) === (index + 1 | 0), /* array */[]));
-                                  }), state[/* board */0])), React.createElement("div", undefined, Utils$ReactTemplate.toString("TODO: Game State Here")));
+              var match = state[/* gameState */1];
+              var tmp;
+              var exit = 0;
+              if (typeof match === "number" || match.tag) {
+                exit = 1;
+              } else {
+                tmp = null;
+              }
+              if (exit === 1) {
+                tmp = React.createElement("button", {
+                      onClick: onRestart
+                    }, Utils$ReactTemplate.toString("Restart!"));
+              }
+              return React.createElement("div", undefined, React.createElement("div", {
+                              className: Css.style(board)
+                            }, $$Array.of_list(List.mapi((function (index, row) {
+                                        return ReasonReact.element(String(index), undefined, BoardRow$ReactTemplate.make(state[/* gameState */1], row, onMark, index, List.length(state[/* board */0]) === (index + 1 | 0), /* array */[]));
+                                      }), state[/* board */0]))), React.createElement("div", undefined, Utils$ReactTemplate.toString(setStatus(state[/* gameState */1]))), React.createElement("div", undefined, tmp));
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],
@@ -49,6 +81,7 @@ function make(state, onMark, onRestart, _children) {
 }
 
 exports.board = board;
+exports.setStatus = setStatus;
 exports.component = component;
 exports.make = make;
 /* board Not a pure module */

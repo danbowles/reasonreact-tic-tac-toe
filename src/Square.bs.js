@@ -10,11 +10,17 @@ var Utils$ReactTemplate = require("./Utils.bs.js");
 
 Css.insertRule(Utils$ReactTemplate.cssButtonReset);
 
-var buttonSquare_000 = Css.flexBasis(Css.em(33.3));
+var buttonSquare_000 = Css.fontFamily("'Righteous', cursive;");
 
 var buttonSquare_001 = /* :: */[
-  Css.padding(Css.em(3.0)),
-  /* [] */0
+  Css.fontSize(Css.em(4.0)),
+  /* :: */[
+    Css.height(Css.pct(100.0)),
+    /* :: */[
+      Css.width(Css.pct(100.0)),
+      /* [] */0
+    ]
+  ]
 ];
 
 var buttonSquare = /* :: */[
@@ -22,11 +28,19 @@ var buttonSquare = /* :: */[
   buttonSquare_001
 ];
 
-var square_000 = Css.borderRight(Css.px(5), Css.dotted, Css.rgb(0, 0, 0));
+var square_000 = Css.borderRight(Css.px(5), Css.solid, Css.hex("DDDDDD"));
+
+var square_001 = /* :: */[
+  Css.flexBasis(Css.em(33.3)),
+  /* :: */[
+    Css.height(Css.px(200)),
+    /* [] */0
+  ]
+];
 
 var square = /* :: */[
   square_000,
-  /* [] */0
+  square_001
 ];
 
 var lastSquare_000 = Css.borderRightWidth(Css.px(0));
