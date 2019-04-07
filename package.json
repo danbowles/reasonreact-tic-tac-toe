@@ -1,5 +1,6 @@
 {
   "name": "reason-react-starter",
+  "homepage": "https?//danbowles.github.io/reasonreact-tic-tac-toe",
   "version": "0.1.0",
   "scripts": {
     "build": "bsb -make-world",
@@ -8,7 +9,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack -w",
     "webpack:production": "NODE_ENV=production webpack",
-    "server": "webpack-dev-server"
+    "server": "webpack-dev-server",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "keywords": [
     "BuckleScript"
@@ -17,6 +20,7 @@
   "license": "MIT",
   "dependencies": {
     "bs-css": "^8.0.3",
+    "gh-pages": "^2.0.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "reason-react": ">=0.4.0"

@@ -34,13 +34,110 @@ var square_001 = /* :: */[
   Css.flexBasis(Css.em(33.3)),
   /* :: */[
     Css.height(Css.px(200)),
-    /* [] */0
+    /* :: */[
+      Css.position(Css.relative),
+      /* [] */0
+    ]
   ]
 ];
 
 var square = /* :: */[
   square_000,
   square_001
+];
+
+var crossSquare_000 = Css.after(/* :: */[
+      Css.contentRule(""),
+      /* :: */[
+        Css.position(Css.absolute),
+        /* :: */[
+          Css.height(Css.px(20)),
+          /* :: */[
+            Css.width(Css.pct(100.0)),
+            /* :: */[
+              Css.background(Css.hex("00796b")),
+              /* :: */[
+                Css.left(Css.px(0)),
+                /* :: */[
+                  Css.top(Css.pct(45.0)),
+                  /* :: */[
+                    Css.transform(Css.rotate(Css.deg(-45))),
+                    /* [] */0
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]);
+
+var crossSquare_001 = /* :: */[
+  Css.before(/* :: */[
+        Css.contentRule(""),
+        /* :: */[
+          Css.position(Css.absolute),
+          /* :: */[
+            Css.height(Css.px(20)),
+            /* :: */[
+              Css.width(Css.pct(100.0)),
+              /* :: */[
+                Css.background(Css.hex("00796b")),
+                /* :: */[
+                  Css.left(Css.px(0)),
+                  /* :: */[
+                    Css.top(Css.pct(45.0)),
+                    /* :: */[
+                      Css.transform(Css.rotate(Css.deg(45))),
+                      /* [] */0
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]),
+  /* [] */0
+];
+
+var crossSquare = /* :: */[
+  crossSquare_000,
+  crossSquare_001
+];
+
+var crossCircle_000 = Css.after(/* :: */[
+      Css.border(Css.px(20), Css.solid, Css.hex("c2185b")),
+      /* :: */[
+        Css.contentRule(""),
+        /* :: */[
+          Css.position(Css.absolute),
+          /* :: */[
+            Css.height(Css.pct(60.0)),
+            /* :: */[
+              Css.width(Css.pct(60.0)),
+              /* :: */[
+                Css.background(Css.white),
+                /* :: */[
+                  Css.left(Css.pct(10.0)),
+                  /* :: */[
+                    Css.top(Css.pct(10.0)),
+                    /* :: */[
+                      Css.borderRadius(Css.pct(100.0)),
+                      /* [] */0
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]);
+
+var crossCircle = /* :: */[
+  crossCircle_000,
+  /* [] */0
 ];
 
 var lastSquare_000 = Css.borderRightWidth(Css.px(0));
@@ -56,6 +153,18 @@ function toValue(field) {
       return "O";
     } else {
       return "X";
+    }
+  } else {
+    return "";
+  }
+}
+
+function getButtonClass(field) {
+  if (field) {
+    if (field[0]) {
+      return Css.style(crossCircle);
+    } else {
+      return Css.style(crossSquare);
     }
   } else {
     return "";
@@ -83,10 +192,17 @@ function make(value, gameState, onMark, isLastSquare, _children) {
                       /* [] */0
                     ]
                   ]);
+              var classNameButton = $$String.concat(" ", /* :: */[
+                    Css.style(buttonSquare),
+                    /* :: */[
+                      getButtonClass(value),
+                      /* [] */0
+                    ]
+                  ]);
               return React.createElement("div", {
                           className: className
                         }, React.createElement("button", {
-                              className: Css.style(buttonSquare),
+                              className: classNameButton,
                               onClick: (function (_evt) {
                                   return Curry._1(onMark, /* () */0);
                                 })
@@ -101,8 +217,11 @@ function make(value, gameState, onMark, isLastSquare, _children) {
 
 exports.buttonSquare = buttonSquare;
 exports.square = square;
+exports.crossSquare = crossSquare;
+exports.crossCircle = crossCircle;
 exports.lastSquare = lastSquare;
 exports.toValue = toValue;
+exports.getButtonClass = getButtonClass;
 exports.component = component;
 exports.make = make;
 /*  Not a pure module */

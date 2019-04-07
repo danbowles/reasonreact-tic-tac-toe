@@ -7,7 +7,7 @@ var $$Array = require("bs-platform/lib/js/array.js");
 var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var $$String = require("bs-platform/lib/js/string.js");
-var ReasonReact = require("reason-react/src/ReasonReact.js");
+var ReasonReact = require("reason-react/lib/js/src/ReasonReact.js");
 var Square$ReactTemplate = require("./Square.bs.js");
 
 var boardRow_000 = Css.borderBottom(Css.px(5), Css.solid, Css.hex("DDDDDD"));

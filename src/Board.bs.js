@@ -24,19 +24,130 @@ var board = /* :: */[
   board_001
 ];
 
-function setStatus(gameState) {
-  if (typeof gameState === "number") {
-    return "Draw! :(";
-  } else if (gameState.tag) {
-    if (gameState[0]) {
-      return "Circle Won!";
-    } else {
-      return "Cross Won!";
-    }
-  } else if (gameState[0]) {
-    return "Turn: Circle";
+var statusText_000 = Css.fontFamily("'Righteous', cursive;");
+
+var statusText_001 = /* :: */[
+  Css.fontSize(Css.em(1.3)),
+  /* :: */[
+    Css.margin2(Css.em(2.0), Css.em(0.0)),
+    /* :: */[
+      Css.textAlign(Css.center),
+      /* :: */[
+        Css.selector("& .playerCross", /* :: */[
+              Css.color(Css.hex("00796b")),
+              /* [] */0
+            ]),
+        /* :: */[
+          Css.selector("& .playerCircle", /* :: */[
+                Css.color(Css.hex("c2185b")),
+                /* [] */0
+              ]),
+          /* [] */0
+        ]
+      ]
+    ]
+  ]
+];
+
+var statusText = /* :: */[
+  statusText_000,
+  statusText_001
+];
+
+var endGameModal_000 = Css.background(Css.rgba(255, 255, 255, 0.9));
+
+var endGameModal_001 = /* :: */[
+  Css.fontFamily("'Righteous', cursive;"),
+  /* :: */[
+    Css.left(Css.pct(50.0)),
+    /* :: */[
+      Css.height(Css.pct(100.0)),
+      /* :: */[
+        Css.position(Css.absolute),
+        /* :: */[
+          Css.top(Css.pct(50.0)),
+          /* :: */[
+            Css.transform(Css.translate(Css.pct(-50.0), Css.pct(-50.0))),
+            /* :: */[
+              Css.width(Css.pct(100.0)),
+              /* :: */[
+                Css.selector("& .modalInner", /* :: */[
+                      Css.display(Css.flexBox),
+                      /* :: */[
+                        Css.flexDirection(Css.column),
+                        /* :: */[
+                          Css.margin(Css.em(3.0)),
+                          /* :: */[
+                            Css.justifyContent(Css.center),
+                            /* [] */0
+                          ]
+                        ]
+                      ]
+                    ]),
+                /* :: */[
+                  Css.selector("h3", /* :: */[
+                        Css.color(Css.hex("37474f")),
+                        /* :: */[
+                          Css.fontSize(Css.em(3.0)),
+                          /* :: */[
+                            Css.textAlign(Css.center),
+                            /* [] */0
+                          ]
+                        ]
+                      ]),
+                  /* :: */[
+                    Css.selector("& button", /* :: */[
+                          Css.background(Css.hex("62727b")),
+                          /* :: */[
+                            Css.borderRadius(Css.px(12)),
+                            /* :: */[
+                              Css.color(Css.white),
+                              /* :: */[
+                                Css.fontSize(Css.em(2.0)),
+                                /* :: */[
+                                  Css.margin2(Css.em(2.0), Css.auto),
+                                  /* :: */[
+                                    Css.padding2(Css.em(0.6), Css.em(0.0)),
+                                    /* :: */[
+                                      Css.width(Css.px(200)),
+                                      /* [] */0
+                                    ]
+                                  ]
+                                ]
+                              ]
+                            ]
+                          ]
+                        ]),
+                    /* [] */0
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+];
+
+var endGameModal = /* :: */[
+  endGameModal_000,
+  endGameModal_001
+];
+
+function getPlayerClass(gameState) {
+  if (typeof gameState === "number" || gameState.tag || !gameState[0]) {
+    return "playerCross";
   } else {
-    return "Turn: Cross";
+    return "playerCircle";
+  }
+}
+
+function setStatus(gameState) {
+  if (typeof gameState === "number" || gameState.tag || !gameState[0]) {
+    return "X";
+  } else {
+    return "O";
   }
 }
 
@@ -63,15 +174,28 @@ function make(state, onMark, onRestart, _children) {
                 tmp = null;
               }
               if (exit === 1) {
-                tmp = React.createElement("button", {
-                      onClick: onRestart
-                    }, Utils$ReactTemplate.toString("Restart!"));
+                var match$1 = state[/* gameState */1];
+                var tmp$1;
+                tmp$1 = typeof match$1 === "number" ? "Draw!" : (
+                    match$1.tag && !match$1[0] ? "Cross Won!" : "Circle Won!"
+                  );
+                tmp = React.createElement("div", {
+                      className: Css.style(endGameModal)
+                    }, React.createElement("div", {
+                          className: "modalInner"
+                        }, React.createElement("h3", undefined, Utils$ReactTemplate.toString(tmp$1)), React.createElement("button", {
+                              onClick: onRestart
+                            }, Utils$ReactTemplate.toString("RESTART"))));
               }
               return React.createElement("div", undefined, React.createElement("div", {
+                              className: Css.style(statusText)
+                            }, React.createElement("span", undefined, Utils$ReactTemplate.toString("Turn: ")), React.createElement("span", {
+                                  className: getPlayerClass(state[/* gameState */1])
+                                }, Utils$ReactTemplate.toString(setStatus(state[/* gameState */1])))), React.createElement("div", {
                               className: Css.style(board)
                             }, $$Array.of_list(List.mapi((function (index, row) {
                                         return ReasonReact.element(String(index), undefined, BoardRow$ReactTemplate.make(state[/* gameState */1], row, onMark, index, List.length(state[/* board */0]) === (index + 1 | 0), /* array */[]));
-                                      }), state[/* board */0]))), React.createElement("div", undefined, Utils$ReactTemplate.toString(setStatus(state[/* gameState */1]))), React.createElement("div", undefined, tmp));
+                                      }), state[/* board */0]))), tmp);
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],
@@ -81,6 +205,9 @@ function make(state, onMark, onRestart, _children) {
 }
 
 exports.board = board;
+exports.statusText = statusText;
+exports.endGameModal = endGameModal;
+exports.getPlayerClass = getPlayerClass;
 exports.setStatus = setStatus;
 exports.component = component;
 exports.make = make;
