@@ -10,7 +10,7 @@
     "webpack": "webpack -w",
     "webpack:production": "NODE_ENV=production webpack",
     "server": "webpack-dev-server",
-    "predeploy": "npm run build",
+    "predeploy": "npm run webpack:production",
     "deploy": "gh-pages -d build"
   },
   "keywords": [
